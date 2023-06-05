@@ -1,0 +1,34 @@
+
+server:
+  port: 8081
+
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+
+spring:
+  cloud:
+    gateway:
+      routes:   
+      - id: QUESTION-SERVICE
+        uri: http://localhost:8082/question
+        predicates:
+        - Path=/question/**
+      
+      -  id: USER-SERVICE
+         uri: http://localhost:8084/users
+         predicates:
+         - Path=/users/**
+     
+        
+      - id: QUIZ-SERVICE
+        uri: http://localhost:8086/quiz
+        predicates:
+        - Path=/quiz/**  
+  application:
+    name: API-Gateway
+    
+    
+         
+      
