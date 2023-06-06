@@ -1,11 +1,10 @@
-import logo from './logo.svg';
 import './App.css';
+import EBookApp from './components/EBookApp';
 
 function App() {
   return (
     <div className="App">
-      <h1>Hello World</h1>
-      <h1>Hello World</h1>
+      <EBookApp />
     </div>
   );
 }
