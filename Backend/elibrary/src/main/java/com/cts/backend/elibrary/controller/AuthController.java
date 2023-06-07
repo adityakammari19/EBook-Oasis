@@ -2,38 +2,46 @@ package com.cts.backend.elibrary.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.cts.backend.elibrary.dto.AuthResponse;
+import com.cts.backend.elibrary.dto.LoginDto;
 import com.cts.backend.elibrary.exception.ConflictException;
 import com.cts.backend.elibrary.exception.UserNotFoundException;
 import com.cts.backend.elibrary.model.User;
-import com.cts.backend.elibrary.service.impl.UserServiceImpl;
+import com.cts.backend.elibrary.service.AuthService;
+import com.cts.backend.elibrary.service.UserService;
 
 import jakarta.validation.Valid;
 
 @Controller
+@RequestMapping("/api/auth")
 public class AuthController {
 
-	private UserServiceImpl userService;
+	@Autowired
+	private AuthService authService;
+	@Autowired
+	private UserService userService;
 
-	public AuthController(UserServiceImpl userService) {
-		this.userService = userService;
-	}
-
-	// handler method to handle home page request
-	@GetMapping("/index")
-	public String home() {
-		return "index";
-	}
-	// handler method to handle login request
-	@GetMapping("/login")
-	public String login() {
-		return "login";
+	@PostMapping("/login")
+	public ResponseEntity<AuthResponse> login(@RequestBody LoginDto loginDto) {
+		System.out.println("Inside Login===============");
+		String token=authService.login(loginDto);
+		System.out.println( "Username " + loginDto.getUsername());
+		AuthResponse authResponse=new AuthResponse();
+		authResponse.setAccessToken(token);
+		return ResponseEntity.ok(authResponse);
+		
+		
 	}
 
 	// handler method to handle user registration form request

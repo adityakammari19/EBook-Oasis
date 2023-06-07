@@ -54,17 +54,16 @@ function LoginComponent() {
 
         <form className='mu-50'>
             {/* <!-- Email input --> */}
-            {showErrorMessage && <div className="errorMessage">Authentication Failed.
-        //         Please check your credentials.</div>}
+            {showErrorMessage && <div className="errorMessage">Authentication Failed. //      Please check your credentials.</div>}
             <div className="form-outline mb-4">
                 <input type="email" id="form2Example1" className="form-control" name="username" value={username} onChange={handleUsernameChange} />
-                <label className="form-label" for="form2Example1">Email address</label>
+                <label className="form-label" htmlFor="form2Example1">Email address</label>
             </div>
 
             {/* <!-- Password input --> */}
             <div className="form-outline mb-4">
                 <input type="password" id="form2Example2" className="form-control" name="password" value={password} onChange={handlePasswordChange} />
-                <label className="form-label" for="form2Example2">Password</label>
+                <label className="form-label" htmlFor="form2Example2">Password</label>
             </div>
 
 

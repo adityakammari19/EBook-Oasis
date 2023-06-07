@@ -1,6 +1,7 @@
 import { createContext, useContext, useState } from "react";
-// import { apiClient } from "../api/ApiClient";
-// import { executeJwtAuthenticationService } from "../api/AuthenticationApiService";
+
+import { apiClient } from "../api/ApiClient";
+import { executeJwtAuthenticationService } from "../api/AuthenticationApiService";
 
 //1: Create a Context
 export const AuthContext = createContext()
@@ -17,17 +18,17 @@ export default function AuthProvider({ children }) {
 
     const [token, setToken] = useState(null)
 
-    function login(username, password) {
-        if (username === 'aditya' && password === 'secret') {
-            setAuthenticated(true)
-            setUsername(username)
-            return true
-        } else {
-            setAuthenticated(false)
-            setUsername(null)
-            return false
-        }
-    }
+    // function login(username, password) {
+    //     if (username === 'aditya' && password === 'secret') {
+    //         setAuthenticated(true)
+    //         setUsername(username)
+    //         return true
+    //     } else {
+    //         setAuthenticated(false)
+    //         setUsername(null)
+    //         return false
+    //     }
+    // }
 
     // async function login(username, password) {
 
@@ -62,38 +63,41 @@ export default function AuthProvider({ children }) {
     // }
 
 
-    // async function login(username, password) {
+    async function login(username, password) {
 
-    //     try {
+        try {
 
-    //         const response = await executeJwtAuthenticationService(username, password)
+            const response = await executeJwtAuthenticationService(username, password)
 
-    //         if (response.status === 200) {
+            console.log(response)
+            if (response.status === 200) {
+                
+                const jwtToken = 'Bearer ' + response.data.accessToken
+                // const jwtToken =  response.data.accessToken
+                setAuthenticated(true)
+                setUsername(username)
+                setToken(jwtToken)
+                console.log(jwtToken)
+                console.log(apiClient)
 
-    //             const jwtToken = 'Bearer ' + response.data.token
+                apiClient.interceptors.request.use(
+                    (config) => {
+                        console.log('intercepting and adding a token')
+                        config.headers.Authorization = jwtToken
+                        return config
+                    }
+                )
 
-    //             setAuthenticated(true)
-    //             setUsername(username)
-    //             setToken(jwtToken)
-
-    //             apiClient.interceptors.request.use(
-    //                 (config) => {
-    //                     console.log('intercepting and adding a token')
-    //                     config.headers.Authorization = jwtToken
-    //                     return config
-    //                 }
-    //             )
-
-    //             return true
-    //         } else {
-    //             logout()
-    //             return false
-    //         }
-    //     } catch (error) {
-    //         logout()
-    //         return false
-    //     }
-    // }
+                return true
+            } else {
+                logout()
+                return false
+            }
+        } catch (error) {
+            logout()
+            return false
+        }
+    }
 
 
     function logout() {
