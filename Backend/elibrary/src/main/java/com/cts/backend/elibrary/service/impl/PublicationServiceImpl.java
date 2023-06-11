@@ -46,6 +46,12 @@ public class PublicationServiceImpl implements PublicationService{
 		// TODO Auto-generated method stub
 		return publicationRepository.findByPublisher(publisher);
 	}
+	
+	@Override
+	public List<Publication> getPublicationsByPublisher(User publisher) {
+		// TODO Auto-generated method stub
+		return publicationRepository.findPublicationsByPublisher(publisher);
+	}
 
 	// Create the publication 
 	@Override

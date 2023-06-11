@@ -61,7 +61,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     }
 
 	@Override
-	public List<Subscription> getSubscriptionsBySubscriberUserId(User subscriber) {
+	public List<Subscription> getSubscriptionsBySubscriber(User subscriber) {
 
 		return subscriptionRepository.findBySubscriber(subscriber);
 	}
@@ -91,6 +91,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
         }
         subscriptionRepository.deleteSubscriptionsBySubscriber(subscriber);
 
-	} 	
+	}
+
 	
 }

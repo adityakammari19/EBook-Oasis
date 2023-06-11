@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 function Header() {
     const authContext = useAuth()
     const isAuthenticated = authContext.isAuthenticated
+    const username = authContext.username
 
     function logout() {
         authContext.logout()
@@ -12,7 +13,7 @@ function Header() {
 
     return (
 
-        <header className="border-bottom border-light border-5 mb-5 p-2">
+        <header className="border-bottom border-light border-5 mb-5 p-2"  style={{backgroundColor:'cyan'}}>
             <div className="container">
                 <div className="row">
                     <nav className="navbar navbar-expand-lg">
@@ -21,7 +22,7 @@ function Header() {
                             <ul className="navbar-nav">
                                 <li className="nav-item">
                                     {isAuthenticated
-                                        && <Link className="nav-link" to="/welcome/aditya">Home</Link>}
+                                        && <Link className="nav-link" to={{pathname:`/welcome/${username}`}}>Home</Link>}
 
                                 </li>
                                 <li className="nav-item">

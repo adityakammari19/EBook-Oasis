@@ -15,8 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cts.backend.elibrary.exception.ConflictException;
+import com.cts.backend.elibrary.exception.UserNotFoundException;
 import com.cts.backend.elibrary.model.Book;
-import com.cts.backend.elibrary.service.impl.BookServiceImpl;
+import com.cts.backend.elibrary.service.BookService;
 
 import jakarta.validation.Valid;
 
@@ -25,19 +26,26 @@ import jakarta.validation.Valid;
 public class BookController {
 
 	@Autowired
-	private BookServiceImpl bookService;
+	private BookService bookService;
 	
 
-    public BookController(BookServiceImpl bookService) { 
+    public BookController(BookService bookService) { 
         this.bookService = bookService; 
     } 
 
+//	// Get a list of all books
+//	  @GetMapping 
+//	    public ResponseEntity<List<Book>> getAllBooks() { 
+//	        List<Book> books = bookService.getAllBooks(); 
+//	        return ResponseEntity.ok(books); 
+//	    } 
+	  
 	// Get a list of all books
-	  @GetMapping 
-	    public ResponseEntity<List<Book>> getAllBooks() { 
-	        List<Book> books = bookService.getAllBooks(); 
-	        return ResponseEntity.ok(books); 
-	    } 
+		  @GetMapping("/user/{username}")
+		    public ResponseEntity<List<Book>> getAllBooks(@PathVariable String username) throws UserNotFoundException { 
+		        List<Book> books = bookService.getBooksButNotSubscribedAndPublished(username); 
+		        return ResponseEntity.ok(books); 
+		    } 
 
 	// Get an book by ID
 	    @GetMapping("/{id}") 

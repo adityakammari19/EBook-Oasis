@@ -58,10 +58,10 @@ public class SecurityConfig {
 
 		httpSecurity.csrf(csrfConfig->csrfConfig.disable())
 		.authorizeHttpRequests(auth->auth
-//				.requestMatchers(HttpMethod.GET,"/api/**").permitAll()
 				.requestMatchers(HttpMethod.OPTIONS , "/**").permitAll()
-				.requestMatchers("/api/auth/**").permitAll().
-				anyRequest().authenticated())
+				.requestMatchers("/api/auth/**").permitAll()
+				.requestMatchers(HttpMethod.POST,"/api/users/register").permitAll()
+				.anyRequest().authenticated())
 		.exceptionHandling(ex->ex.authenticationEntryPoint(authenticationEntryPoint))
 		.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 		;

@@ -40,13 +40,20 @@ public class PublicationController {
         return ResponseEntity.ok(publications); 
     }
     
+////	Getting publication with the userId
+//    @GetMapping("/user/{userId}") 
+//    public ResponseEntity<List<Publication>> getPublicationByPublisher(@PathVariable Long userId) throws UserNotFoundException {
+//    	User publisher = userService.getUserById(userId);
+//    	List<Publication> publications = publicationService.getPublicationsByPublisherUserId(publisher); 
+//        return ResponseEntity.ok(publications); 
+//    } 
 //	Getting publication with the userId
-    @GetMapping("/user/{userId}") 
-    public ResponseEntity<List<Publication>> getPublicationByPublisher(@PathVariable Long userId) throws UserNotFoundException {
-    	User publisher = userService.getUserById(userId);
-    	List<Publication> publications = publicationService.getPublicationsByPublisherUserId(publisher); 
+    @GetMapping("/user/{username}") 
+    public ResponseEntity<List<Publication>> getPublicationByPublisher(@PathVariable String username) throws UserNotFoundException {
+    	User publisher = userService.getUserByUsername(username);
+    	List<Publication> publications = publicationService.getPublicationsByPublisher(publisher); 
         return ResponseEntity.ok(publications); 
-    } 
+    }
     
     @GetMapping("/{id}") 
     public ResponseEntity<Publication> getPublicationById(@PathVariable Long id) { 

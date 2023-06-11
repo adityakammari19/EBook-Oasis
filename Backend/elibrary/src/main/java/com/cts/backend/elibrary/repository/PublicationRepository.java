@@ -11,4 +11,6 @@ public interface PublicationRepository extends JpaRepository<Publication, Long> 
 
 
 	List<Publication> findByPublisher(User publisher);
+	List<Publication> findPublicationsByPublisher(User publisher);
+	
 }

@@ -8,6 +8,8 @@ import WelcomeComponent from './WelcomeComponent'
 import ErrorComponent from './ErrorComponent'
 import Subscriptions from './Subscriptions'
 import Publications from './Publications'
+import RegistrationComponent from './RegistrationComponent'
+import PublishNewBook from './PublishNewBook'
 
 
 function AuthenticatedRoute({ children }) {
@@ -29,6 +31,7 @@ function EBookApp() {
                     <Routes>
                         <Route path='/' element={<LoginComponent />} />
                         <Route path='/login' element={<LoginComponent />} />
+                        <Route path='/register' element={<RegistrationComponent />} />
                         <Route path='/welcome/:username' element={
                             <AuthenticatedRoute>
                                 <WelcomeComponent />
@@ -43,6 +46,12 @@ function EBookApp() {
                         <Route path='/publications' element={
                             <AuthenticatedRoute>
                                 <Publications />
+                            </AuthenticatedRoute>
+                        } />
+
+                        <Route path='/publish' element={
+                            <AuthenticatedRoute>
+                                <PublishNewBook />
                             </AuthenticatedRoute>
                         } />
 

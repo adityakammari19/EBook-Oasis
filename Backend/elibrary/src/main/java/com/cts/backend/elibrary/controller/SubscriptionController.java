@@ -31,7 +31,7 @@ public class SubscriptionController {
     public SubscriptionController(SubscriptionService subscriptionService,UserServiceImpl userService) { 
         this.subscriptionService = subscriptionService; 
         this.userService = userService;
-    } 
+    }  
 
     @GetMapping 
     public ResponseEntity<List<Subscription>> getAllSubscriptions() { 
@@ -39,11 +39,19 @@ public class SubscriptionController {
         return ResponseEntity.ok(subscriptions); 
     }
     
+////	Getting subscription with the userId
+//    @GetMapping("/user/{userId}") 
+//    public ResponseEntity<List<Subscription>> getSubscriptionBySubscriber(@PathVariable Long userId) throws UserNotFoundException {
+//    	User subscriber = userService.getUserById(userId);
+//    	List<Subscription> subscriptions = subscriptionService.getSubscriptionsBySubscriber(subscriber); 
+//        return ResponseEntity.ok(subscriptions); 
+//    } 
+    
 //	Getting subscription with the userId
-    @GetMapping("/user/{userId}") 
-    public ResponseEntity<List<Subscription>> getSubscriptionBySubscriber(@PathVariable Long userId) throws UserNotFoundException {
-    	User subscriber = userService.getUserById(userId);
-    	List<Subscription> subscriptions = subscriptionService.getSubscriptionsBySubscriberUserId(subscriber); 
+    @GetMapping("/user/{username}") 
+    public ResponseEntity<List<Subscription>> getSubscriptionBySubscriber(@PathVariable String username) throws UserNotFoundException {
+    	User subscriber = userService.getUserByUsername(username);
+    	List<Subscription> subscriptions = subscriptionService.getSubscriptionsBySubscriber(subscriber); 
         return ResponseEntity.ok(subscriptions); 
     } 
     

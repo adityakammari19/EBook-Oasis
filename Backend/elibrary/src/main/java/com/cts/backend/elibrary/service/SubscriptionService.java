@@ -14,7 +14,7 @@ public interface SubscriptionService {
     
     public Subscription getSubscriptionById(Long id) ;
     
-    public List<Subscription> getSubscriptionsBySubscriberUserId(User subscriber) ;
+    public List<Subscription> getSubscriptionsBySubscriber(User subscriber) ;
 
     public Subscription createSubscription(SubscriptionDto subscriptionDto) throws UserNotFoundException, ConflictException ;
     

@@ -1,8 +1,44 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useAuth } from '../security/AuthContext'
+import { retrieveAllSubscribedBooksApi } from '../api/EBookApiService'
+import BookCard from './BookCard'
 
 function Subscriptions() {
+
+  const {username} =useAuth()
+  const [subscriptions,setSubscriptions]= useState([])
+
+
+  useEffect( () =>{
+    retriveAllSubscriptions()
+    // console.log(subscriptions)
+},[])
+
+  function retriveAllSubscriptions() {
+
+    retrieveAllSubscribedBooksApi(username)
+    .then((response) => setSubscriptions(response.data))
+    .catch((error) =>console.log(error))
+  }
+
+
   return (
-    <div>Subscriptions</div>
+    <>
+    <div> All Subscriptions of the user, {username}</div>
+    <div>
+          {subscriptions.map(
+                (subscription) => {
+
+                  return (
+                    <div>
+                    <BookCard book = {subscription.book}/>
+                    <div>{subscription.subscriptionDate}</div>
+                    </div>
+                  );
+                }
+              )}
+        </div>
+    </>
   )
 }
 
