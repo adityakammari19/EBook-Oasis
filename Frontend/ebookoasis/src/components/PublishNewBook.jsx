@@ -21,14 +21,14 @@ function PublishNewBook() {
     }));
   };
 
-  async function handleSubmit() {
+  async function handlePublish() {
 
   }
 
   return (
     <div className='row justify-content-center'>
       <form className='mu-50 col-sm-6 mb-3 ml-3'>
-        {/* <!-- Email input --> */}
+
         {showErrorMessage && <div className="errorMessage"> Please enter correct details.</div>}
 
         <div className="form-outline mb-4">
@@ -37,7 +37,7 @@ function PublishNewBook() {
         </div>
         <div className="form-outline mb-4">
           <label className="form-label" htmlFor="description">Description</label>
-          <input type="text" id="description" className="form-control" name="description" value={book.description} onChange={handleChange} />
+          <textarea class="form-control" id="description" name="description" value={book.description} onChange={handleChange} rows="3"></textarea>
         </div>
         <div className="form-outline mb-4">
           <label className="form-label" htmlFor="author">Author</label>
@@ -62,7 +62,7 @@ function PublishNewBook() {
         </div>
 
         {/* <!-- Submit button --> */}
-        <button type="button" className="btn btn-primary btn-block mb-4" name="register" onClick={handleSubmit}>Register</button>
+        <button type="button" className="btn btn-primary btn-block mb-4" name="publish" onClick={handlePublish}>Publish</button>
 
 
       </form>

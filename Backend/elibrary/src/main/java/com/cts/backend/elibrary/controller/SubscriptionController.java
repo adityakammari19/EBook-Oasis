@@ -47,7 +47,7 @@ public class SubscriptionController {
 //        return ResponseEntity.ok(subscriptions); 
 //    } 
     
-//	Getting subscription with the userId
+//	Getting subscription with the username
     @GetMapping("/user/{username}") 
     public ResponseEntity<List<Subscription>> getSubscriptionBySubscriber(@PathVariable String username) throws UserNotFoundException {
     	User subscriber = userService.getUserByUsername(username);
@@ -61,18 +61,38 @@ public class SubscriptionController {
         return ResponseEntity.ok(subscription); 
     } 
 
-    @PostMapping 
-    public ResponseEntity<Subscription> createSubscription(@RequestBody SubscriptionDto subscriptionDto) throws UserNotFoundException, ConflictException { 
-        Subscription savedSubscription = subscriptionService.createSubscription(subscriptionDto); 
-        return ResponseEntity.status(HttpStatus.CREATED).body(savedSubscription); 
-    } 
+//    @PostMapping 
+//    public ResponseEntity<Subscription> createSubscriptionWithDto(@RequestBody SubscriptionDto subscriptionDto) throws UserNotFoundException, ConflictException { 
+//        Subscription savedSubscription = subscriptionService.createSubscription(subscriptionDto); 
+//        return ResponseEntity.status(HttpStatus.CREATED).body(savedSubscription); 
+//    } 
     
- // Delete an subscription by subscriberId and bookId
- 	 @DeleteMapping("/{subscriberId}/{bookId}") 
- 	    public ResponseEntity<String> deleteSubscription(@PathVariable Long subscriberId,@PathVariable long bookId) throws UserNotFoundException { 
- 		subscriptionService.deleteSubscriptionBySubscriberAndBook(subscriberId,bookId); 
+    @PostMapping("/users/{username}/books/{bookId}")
+    public ResponseEntity<Subscription> createSubscription(@PathVariable String username,@PathVariable long bookId) throws UserNotFoundException, ConflictException { 
+    	User subscriber = userService.getUserByUsername(username);
+    	SubscriptionDto subscriptionDto = new SubscriptionDto();
+    	
+    	subscriptionDto.setSubscriberId(subscriber.getUserId());
+    	subscriptionDto.setBookId(bookId);
+    	Subscription savedSubscription = subscriptionService.createSubscription(subscriptionDto); 
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedSubscription); 
+    }
+    
+ // Delete an subscription by username and bookId
+ 	
+ 	@DeleteMapping("/users/{username}/books/{bookId}")
+ 	    public ResponseEntity<String> deleteSubscriptionByUsernameAndBookId(@PathVariable String username,@PathVariable long bookId) throws UserNotFoundException { 
+ 		User subscriber = userService.getUserByUsername(username);
+ 		 subscriptionService.deleteSubscriptionBySubscriberAndBook(subscriber.getUserId(),bookId); 
  	        return ResponseEntity.status(HttpStatus.OK).body("Successfully Deleted."); 
  	    } 
+ 	 
+ 	// Delete an subscription by subscriberId and bookId
+ 	 @DeleteMapping("/{subscriberId}/{bookId}") 
+ 	 	    public ResponseEntity<String> deleteSubscriptionByUserId(@PathVariable Long subscriberId,@PathVariable long bookId) throws UserNotFoundException { 
+ 	 		subscriptionService.deleteSubscriptionBySubscriberAndBook(subscriberId,bookId); 
+ 	 	        return ResponseEntity.status(HttpStatus.OK).body("Successfully Deleted."); 
+ 	 	    } 
  	 
  	 // Delete an subscription by subscriberId 
 

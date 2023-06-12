@@ -10,6 +10,7 @@ import Subscriptions from './Subscriptions'
 import Publications from './Publications'
 import RegistrationComponent from './RegistrationComponent'
 import PublishNewBook from './PublishNewBook'
+import Book from './Book'
 
 
 function AuthenticatedRoute({ children }) {
@@ -49,6 +50,11 @@ function EBookApp() {
                             </AuthenticatedRoute>
                         } />
 
+                        <Route path='/users/:username/books/:bookId' element={
+                            <AuthenticatedRoute>
+                                <Book />
+                            </AuthenticatedRoute>
+                        } />
                         <Route path='/publish' element={
                             <AuthenticatedRoute>
                                 <PublishNewBook />

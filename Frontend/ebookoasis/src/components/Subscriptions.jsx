@@ -7,6 +7,7 @@ function Subscriptions() {
 
   const {username} =useAuth()
   const [subscriptions,setSubscriptions]= useState([])
+  const fromSubscriptionRoute = true
 
 
   useEffect( () =>{
@@ -31,7 +32,7 @@ function Subscriptions() {
 
                   return (
                     <div>
-                    <BookCard book = {subscription.book}/>
+                    <BookCard book = {subscription.book} fromSubscriptionRoute = {fromSubscriptionRoute}/>
                     <div>{subscription.subscriptionDate}</div>
                     </div>
                   );

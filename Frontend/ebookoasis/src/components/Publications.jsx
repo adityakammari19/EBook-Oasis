@@ -8,6 +8,7 @@ function Publications() {
 
   const {username} =useAuth()
   const [publications,setPublications]= useState([])
+  const fromPublicationRoute = true
 
 
   useEffect( () =>{
@@ -31,7 +32,7 @@ function Publications() {
 
                   return (
                     <div>
-                    <BookCard book = {publication.book}/>
+                    <BookCard book = {publication.book} fromPublicationRoute = {fromPublicationRoute}/>
                     <div>{publication.publicationDate}</div>
                     </div>
                   );

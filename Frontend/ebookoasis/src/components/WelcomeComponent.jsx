@@ -5,6 +5,7 @@ import BookCard from './BookCard'
 
 function WelcomeComponent() {
   const { username } = useParams()
+  const fromHomeRoute =true
 
 
 
@@ -42,7 +43,7 @@ function WelcomeComponent() {
 
                   return (
                     <div className="col-sm-6 mb-3 ml-3">
-                    <BookCard book = {book}/>
+                    <BookCard book = {book}  fromHomeRoute ={fromHomeRoute}/>
                     </div>
                   );
                 }
