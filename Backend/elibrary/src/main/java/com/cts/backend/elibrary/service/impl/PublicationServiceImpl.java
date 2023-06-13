@@ -55,9 +55,9 @@ public class PublicationServiceImpl implements PublicationService{
 
 	// Create the publication 
 	@Override
-	public Publication createPublication(PublicationDto publicationDto) throws UserNotFoundException, ConflictException {
-		    User user = userService.getUserById(publicationDto.getPublisherId()) ;
-	        Book book = bookService.createBook(publicationDto.getBook()) ;
+	public Publication createPublication(Long publisherId ,String isbn) throws UserNotFoundException, ConflictException {
+		    User user = userService.getUserById(publisherId) ;
+	        Book book = bookService.getBookByIsbn(isbn) ;
 
 
 
@@ -70,5 +70,23 @@ public class PublicationServiceImpl implements PublicationService{
       
 	        return publicationRepository.save(publication); 
 	}
+	
+//	@Override
+//	public Publication createPublication(PublicationDto publicationDto) throws UserNotFoundException, ConflictException {
+//		    User user = userService.getUserById(publicationDto.getPublisherId()) ;
+//	        Book book = bookService.createBook(publicationDto.getBook()) ;
+//
+//
+//
+//
+//	        Publication publication = new Publication(); 
+//	        LocalDate publicationDate = LocalDate.now(); 
+//	        publication.setPublisher(user); 
+//	        publication.setBook(book); 
+//	        publication.setPublicationDate(publicationDate);
+//      
+//	        return publicationRepository.save(publication); 
+//	}
+
 
 }

@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -44,11 +45,18 @@ public class Book {
 	@NotNull(message ="pageCount should not be null")
 	private int pageCount;
 
-	@NotEmpty(message ="coverImageUrl should not be empty")
-    private String coverImageUrl; 
+//	@NotEmpty(message ="coverImageUrl should not be empty")
+//    private String coverImageUrl; 
+//	
+//	@NotEmpty(message ="sourceLocation should not be empty")
+//    private String sourceLocation;
 	
-	@NotEmpty(message ="sourceLocation should not be empty")
-    private String sourceLocation;
+	@Lob
+	@Column(columnDefinition = "mediumblob")
+	private String coverImage;
+	@Lob
+	@Column(columnDefinition = "mediumblob")
+	private String sourceFile;
      
 
 	

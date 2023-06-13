@@ -55,15 +55,27 @@ public class PublicationController {
         return ResponseEntity.ok(publications); 
     }
     
+    
+    
     @GetMapping("/{id}") 
     public ResponseEntity<Publication> getPublicationById(@PathVariable Long id) { 
         Publication publication = publicationService.getPublicationById(id); 
         return ResponseEntity.ok(publication); 
     } 
 
-    @PostMapping 
-    public ResponseEntity<Publication> createPublication(@RequestBody @Valid PublicationDto publicationDto) throws UserNotFoundException, ConflictException { 
-        Publication savedPublication = publicationService.createPublication(publicationDto); 
+    @PostMapping("/users/{username}/books/{isbn}")
+    public ResponseEntity<Publication> createPublication(@PathVariable String username,@PathVariable String isbn) throws UserNotFoundException, ConflictException { 
+    	User publisher = userService.getUserByUsername(username);
+    	
+    	
+    	Publication savedPublication = publicationService.createPublication(publisher.getUserId(),isbn); 
         return ResponseEntity.status(HttpStatus.CREATED).body(savedPublication); 
     } 
+    
+    
+    
+    
+    
+    
+    
 }

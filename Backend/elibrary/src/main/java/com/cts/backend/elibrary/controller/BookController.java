@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.cts.backend.elibrary.exception.ConflictException;
 import com.cts.backend.elibrary.exception.UserNotFoundException;
@@ -53,13 +55,20 @@ public class BookController {
 	        Book book = bookService.getBookById(id); 
 	        return ResponseEntity.ok(book); 
 	    } 
-
-	// Create a new book
+	 // Create a new book
 	    @PostMapping 
-	    public ResponseEntity<Book> createBook(@RequestBody @Valid Book book) throws ConflictException { 
-	        Book savedBook = bookService.createBook(book); 
+	    public ResponseEntity<Book> createBook(@RequestParam("coverImage") MultipartFile coverImage,@RequestParam("sourceFile") MultipartFile sourceFile ,@RequestParam("title") String title,@RequestParam("description") String description,@RequestParam("author") String author,@RequestParam("isbn") String isbn,@RequestParam("pageCount") int pageCount) throws ConflictException { 
+	        System.out.println("In the createBook"+ title + description + author);
+	    	Book savedBook = bookService.createBookWithFiles(coverImage,sourceFile,title,description,author,isbn,pageCount); 
 	        return ResponseEntity.status(HttpStatus.CREATED).body(savedBook); 
 	    } 
+
+//	// Create a new book
+//	    @PostMapping 
+//	    public ResponseEntity<Book> createBook(@RequestBody @Valid Book book) throws ConflictException { 
+//	        Book savedBook = bookService.createBook(book); 
+//	        return ResponseEntity.status(HttpStatus.CREATED).body(savedBook); 
+//	    } 
 
 	// Update an existing book
 	@PutMapping("/{id}")

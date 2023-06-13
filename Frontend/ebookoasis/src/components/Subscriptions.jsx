@@ -5,40 +5,40 @@ import BookCard from './BookCard'
 
 function Subscriptions() {
 
-  const {username} =useAuth()
-  const [subscriptions,setSubscriptions]= useState([])
+  const { username } = useAuth()
+  const [subscriptions, setSubscriptions] = useState([])
   const fromSubscriptionRoute = true
 
 
-  useEffect( () =>{
+  useEffect(() => {
     retriveAllSubscriptions()
     // console.log(subscriptions)
-},[])
+  }, [])
 
   function retriveAllSubscriptions() {
 
     retrieveAllSubscribedBooksApi(username)
-    .then((response) => setSubscriptions(response.data))
-    .catch((error) =>console.log(error))
+      .then((response) => setSubscriptions(response.data))
+      .catch((error) => console.log(error))
   }
 
 
   return (
     <>
-    <div> All Subscriptions of the user, {username}</div>
-    <div>
-          {subscriptions.map(
-                (subscription) => {
+      <div> All Subscriptions of the user, {username}</div>
+      <div>
+        {subscriptions.map(
+          (subscription) => {
 
-                  return (
-                    <div>
-                    <BookCard book = {subscription.book} fromSubscriptionRoute = {fromSubscriptionRoute}/>
-                    <div>{subscription.subscriptionDate}</div>
-                    </div>
-                  );
-                }
-              )}
-        </div>
+            return (
+              <div>
+                <BookCard book={subscription.book} fromSubscriptionRoute={fromSubscriptionRoute} />
+                <div>{subscription.subscriptionDate}</div>
+              </div>
+            );
+          }
+        )}
+      </div>
     </>
   )
 }

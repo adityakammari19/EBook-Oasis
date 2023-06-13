@@ -16,7 +16,7 @@ public interface PublicationService {
     
     public List<Publication> getPublicationsByPublisherUserId(User publisher) ;
 
-    public Publication createPublication(PublicationDto PublicationDto) throws UserNotFoundException, ConflictException ;
+    public Publication createPublication(Long publisherId ,String isbn) throws UserNotFoundException, ConflictException ;
 
-	List<Publication> getPublicationsByPublisher(User publisher);
+	List<Publication> getPublicationsByPublisher(User publisher); 
 }

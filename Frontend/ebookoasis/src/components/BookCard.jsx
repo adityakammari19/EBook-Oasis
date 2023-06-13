@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../security/AuthContext';
 
 function BookCard({ book, fromSubscriptionRoute ,fromHomeRoute,fromPublicationRoute}) {
-    const { author, coverImageUrl, description, isbn, pageCount, sourceLocation, title, bookId } = book;
+    const { author, coverImage, description, isbn, pageCount, sourceFile, title, bookId } = book;
 
     const {username} =useAuth()
 
@@ -14,7 +14,7 @@ function BookCard({ book, fromSubscriptionRoute ,fromHomeRoute,fromPublicationRo
             <div className="card" style={{ width: 40+'em' }}>
                 <div className="row">
                     <div className="col-md-4">
-                        <img src={coverImageUrl} className="card-img-top img-fluid" alt={title} />
+                        <img src={`data:image/jpeg;base64,${coverImage}`} className="card-img-top img-fluid" alt={title} />
                     </div>
                     <div className="col-md-8">
                         <div className="card-body" style={{ borderWidth: 10 }}>

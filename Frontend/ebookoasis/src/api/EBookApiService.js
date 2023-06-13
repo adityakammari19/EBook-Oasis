@@ -17,3 +17,13 @@ export const subscribeToABookApi
 
 export const unSubscribeToABookApi
     = (username,bookId) => apiClient.delete(`/api/subscriptions/users/${username}/books/${bookId}`)
+
+export const publishNewBookApi
+    = (formData) => apiClient.post(`/api/books`,formData , { 
+        headers: { 
+          'Content-Type': 'multipart/form-data', 
+        }, 
+      })
+
+export const addPublicationApi
+    = (username,isbn) => apiClient.post(`api/publications/users/${username}/books/${isbn}`)
