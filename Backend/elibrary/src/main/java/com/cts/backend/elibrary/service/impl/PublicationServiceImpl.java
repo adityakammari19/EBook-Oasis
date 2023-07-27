@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.cts.backend.elibrary.dto.PublicationDto;
 import com.cts.backend.elibrary.exception.ConflictException;
 import com.cts.backend.elibrary.exception.NotFoundException;
 import com.cts.backend.elibrary.exception.UserNotFoundException;
@@ -30,20 +29,17 @@ public class PublicationServiceImpl implements PublicationService{
     
 	@Override
 	public List<Publication> getAllPublications() {
-		// TODO Auto-generated method stub
 		return publicationRepository.findAll();
 	}
 
 	@Override
 	public Publication getPublicationById(Long id) {
-		// TODO Auto-generated method stub
 		 return publicationRepository.findById(id)
 		 			.orElseThrow(() -> new NotFoundException("Publication not found with id: " + id)); 
 	}
 
 	@Override
 	public List<Publication> getPublicationsByPublisherUserId(User publisher) {
-		// TODO Auto-generated method stub
 		return publicationRepository.findByPublisher(publisher);
 	}
 	
@@ -59,9 +55,6 @@ public class PublicationServiceImpl implements PublicationService{
 		    User user = userService.getUserById(publisherId) ;
 	        Book book = bookService.getBookByIsbn(isbn) ;
 
-
-
-
 	        Publication publication = new Publication(); 
 	        LocalDate publicationDate = LocalDate.now(); 
 	        publication.setPublisher(user); 
@@ -70,23 +63,5 @@ public class PublicationServiceImpl implements PublicationService{
       
 	        return publicationRepository.save(publication); 
 	}
-	
-//	@Override
-//	public Publication createPublication(PublicationDto publicationDto) throws UserNotFoundException, ConflictException {
-//		    User user = userService.getUserById(publicationDto.getPublisherId()) ;
-//	        Book book = bookService.createBook(publicationDto.getBook()) ;
-//
-//
-//
-//
-//	        Publication publication = new Publication(); 
-//	        LocalDate publicationDate = LocalDate.now(); 
-//	        publication.setPublisher(user); 
-//	        publication.setBook(book); 
-//	        publication.setPublicationDate(publicationDate);
-//      
-//	        return publicationRepository.save(publication); 
-//	}
-
 
 }

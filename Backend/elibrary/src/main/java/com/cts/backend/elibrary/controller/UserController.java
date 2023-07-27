@@ -16,6 +16,7 @@ import com.cts.backend.elibrary.exception.UserNotFoundException;
 import com.cts.backend.elibrary.model.User;
 import com.cts.backend.elibrary.service.impl.UserServiceImpl;
 
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.validation.Valid;
 
 @RestController 
@@ -23,12 +24,11 @@ import jakarta.validation.Valid;
 public class UserController {
 
 	 private final UserServiceImpl userService; 
-//	 private final SubscriptionServiceImpl subscriptionService; 
+
 	 
 	
 	    public UserController(UserServiceImpl userService) { 
          this.userService = userService; 
-//         this.subscriptionService = subscriptionService; 
 	    } 
 
 	 
@@ -40,6 +40,7 @@ public class UserController {
 	    } 
 	    
 	 // Get a list of all users
+	    
 		  @GetMapping 
 		    public ResponseEntity<List<User>> getAllUsers() { 
 		        List<User> users = userService.getAllUsers(); 
@@ -53,17 +54,5 @@ public class UserController {
 		        return ResponseEntity.ok(user); 
 		    } 
 
-//		// update a  user
-//		    @PostMapping("/{id}")
-//		    public ResponseEntity<User> updateUser(@PathVariable Long id,@RequestBody @Valid User user) throws ConflictException { 
-//		        User updatedUser = userService.updateUser(id,user); 
-//		        return ResponseEntity.status(HttpStatus.CREATED).body(updatedUser); 
-//		    } 
-//		    
-//		 // delete a new user
-//		    @DeleteMapping("/{subscriberId}") 
-//	 	    public ResponseEntity<String> deleteUser(@PathVariable Long subscriberId) { 
-//		    	userService.deleteUser(subscriberId); 
-//	 	        return ResponseEntity.status(HttpStatus.OK).body("Successfully Deleted."); 
-//	 	    }
+
 }

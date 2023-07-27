@@ -7,19 +7,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cts.backend.elibrary.dto.PublicationDto;
 import com.cts.backend.elibrary.exception.ConflictException;
 import com.cts.backend.elibrary.exception.UserNotFoundException;
 import com.cts.backend.elibrary.model.Publication;
 import com.cts.backend.elibrary.model.User;
 import com.cts.backend.elibrary.service.impl.PublicationServiceImpl;
 import com.cts.backend.elibrary.service.impl.UserServiceImpl;
-
-import jakarta.validation.Valid;
 
 @RestController 
 @RequestMapping("/api/publications") 

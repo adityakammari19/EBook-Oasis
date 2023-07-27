@@ -1,59 +1,60 @@
-import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
-import { retrieveAllBooksApi } from '../api/EBookApiService'
-import BookCard from './BookCard'
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { retrieveAllBooksApi } from '../api/EBookApiService';
+import BookCard from './BookCard';
 
 function WelcomeComponent() {
-  const { username } = useParams()
-  const fromHomeRoute =true
+  const { username } = useParams();
+  const fromHomeRoute = true;
 
-
-
-  const [books, setBooks] = useState([])
-
+  const [books, setBooks] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-
-  }, [books])
+    handleRetrieveAllBooksApi();
+  }, []);
 
   function handleRetrieveAllBooksApi() {
-    retrieveAllBooksApi(username)
-      .then((response) => {setBooks(response.data)})
-      .catch((error) => console.log(error))
-      .finally(() => console.log('cleanup'))
+    setLoading(true);
 
+    retrieveAllBooksApi(username)
+      .then((response) => {
+        setBooks(response.data);
+      })
+      .catch((error) => console.log(error))
+      .finally(() => {
+        setLoading(false);
+        console.log('cleanup');
+      });
   }
 
-
   return (
-    <div className="WelcomeComponent">
+    <div className="WelcomeComponent " style={{ backgroundColor: 'rgb(248, 246, 244)', color: 'black' }} >
       <h1>Welcome {username}</h1>
 
-      <div>
-        <button className="btn btn-success m-5" onClick={handleRetrieveAllBooksApi}>
-          Retrive All Books</button>
-      </div>
-      <div className="text-info">
-        
-        <div>
-        <div className="row">
-  {/* <div class="col-sm-6 mb-3 mb-sm-0"> */}
-          {books.map(
-                (book) => {
-
-                  return (
-                    <div className="col-sm-6 mb-3 ml-3">
-                    <BookCard book = {book}  fromHomeRoute ={fromHomeRoute}/>
-                    </div>
-                  );
-                }
-              )}
-              {/* </div> */}
-              </div>
+      {loading ? (
+        <div className="d-flex justify-content-center">
+          <div className="spinner-border" role="status">
+            {/* <span className="sr-only">Loading...</span> */}
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className="text-info">
+          <div>
+            <div className="row p-5">
+              {books.map((book) => {
+                return (
+                  <div className="col-md-6 col-lg-4 mb-3 ml-3 shadow p-3" style={{ justifyContent: 'space-between' }} key={book.bookId}>
+                    <BookCard book={book} fromHomeRoute={fromHomeRoute} />
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
-  )
+  );
 }
 
-export default WelcomeComponent
+export default WelcomeComponent;

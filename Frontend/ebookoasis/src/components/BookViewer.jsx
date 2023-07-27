@@ -14,15 +14,8 @@ function BookViewer(props) {
   };
   return (<>
     <div>
-      <h2>{props.book.title}</h2>
-      <p>Author: {props.book.author}</p>
-      <p>ISBN: {props.book.isbn}</p>
-      <p>Page Count: {props.book.pageCount}</p>
-      {/* <p>{props.book.sourceFile}</p> */}
-      <div>
-        <img src={`data:image/jpeg;base64,${props.book.coverImage}`} alt={props.book.title} />
-      </div>
-      <div>
+
+      <div className="d-flex justify-content-center bg-black bg-opacity-25" >
         <Document
           file={`data:application/pdf;base64,${props.book.sourceFile}`}
           onLoadSuccess={onDocumentLoadSuccess}

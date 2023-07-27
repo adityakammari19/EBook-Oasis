@@ -2,7 +2,6 @@ package com.cts.backend.elibrary.service;
 
 import java.util.List;
 
-import com.cts.backend.elibrary.dto.PublicationDto;
 import com.cts.backend.elibrary.exception.ConflictException;
 import com.cts.backend.elibrary.exception.UserNotFoundException;
 import com.cts.backend.elibrary.model.Publication;

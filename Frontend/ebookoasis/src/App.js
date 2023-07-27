@@ -3,7 +3,7 @@ import EBookApp from './components/EBookApp';
 
 function App() {
   return (
-    <div className="App">
+    <div className="App bg-light" >
       <EBookApp />
     </div>
   );

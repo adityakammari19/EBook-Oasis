@@ -38,6 +38,7 @@ function EBookApp() {
                                 <WelcomeComponent />
                             </AuthenticatedRoute>
                         } />
+
                         <Route path='/subscriptions' element={
                             <AuthenticatedRoute>
                                 <Subscriptions />

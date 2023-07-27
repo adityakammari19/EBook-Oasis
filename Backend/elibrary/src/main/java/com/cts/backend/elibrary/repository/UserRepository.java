@@ -7,9 +7,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.cts.backend.elibrary.model.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
-	User findUserByUsername(String username);
 	
-//	@Query("delete from users where userId=?")
+	User findUserByUsername(String username);
+
 	void deleteUserByUserId(long userId);
 
 	User findByUserId(Long id);

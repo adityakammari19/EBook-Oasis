@@ -21,8 +21,6 @@ import com.cts.backend.elibrary.service.PublicationService;
 import com.cts.backend.elibrary.service.SubscriptionService;
 import com.cts.backend.elibrary.service.UserService;
 
-import ch.qos.logback.classic.spi.STEUtil;
-
 @Service
 public class BookServiceImpl implements BookService {
 	
@@ -54,7 +52,7 @@ public class BookServiceImpl implements BookService {
 				.orElseThrow(() -> new NotFoundException("Book not found with id " + id));
 	}
 	public Book getBookByIsbn(String isbn) {
-		// TODO Auto-generated method stub
+
 		return bookRepository.findBookByIsbn(isbn);
 	}
 	
@@ -63,7 +61,7 @@ public class BookServiceImpl implements BookService {
           throw new ConflictException("Book already exists"); 
       } 
 		Book temporaryBook = new Book();
-//	temporaryBook.setBookId(book.getBookId());
+
 		String coveImageFileName = StringUtils.cleanPath(coverImage.getOriginalFilename());
 		String sourceFileFileName = StringUtils.cleanPath(sourceFile.getOriginalFilename());
 		
@@ -93,35 +91,7 @@ public class BookServiceImpl implements BookService {
 	return bookRepository.save(temporaryBook);
 	}
 	
-//	public Book createBook(Book book) throws ConflictException {
-//		if(bookRepository.findBookByIsbn(book.getIsbn()) != null) { 
-//            throw new ConflictException("Book already exists"); 
-//        } 
-//		Book temporaryBook = new Book();
-////		temporaryBook.setBookId(book.getBookId());
-//		temporaryBook.setTitle(book.getTitle());
-//		temporaryBook.setDescription(book.getDescription());
-//		temporaryBook.setAuthor(book.getAuthor());
-//		temporaryBook.setIsbn(book.getIsbn());
-//		temporaryBook.setPageCount(book.getPageCount());
-//		temporaryBook.setCoverImageUrl(book.getCoverImageUrl());
-//		temporaryBook.setSourceLocation(book.getSourceLocation());
-//		
-//		return bookRepository.save(temporaryBook);
-//	}
-//	public Book updateBook(Long id, Book book) {
-//		Book existingBook = bookRepository.findById(id)
-//				.orElseThrow(() -> new NotFoundException("Book not found with id " + id));
-//
-//		existingBook.setTitle(book.getTitle());
-//		existingBook.setDescription(book.getDescription());
-//		existingBook.setAuthor(book.getAuthor());
-//		existingBook.setIsbn(book.getIsbn());
-//		existingBook.setPageCount(book.getPageCount());
-//		existingBook.setCoverImageUrl(book.getCoverImageUrl());
-//		existingBook.setSourceLocation(book.getSourceLocation());
-//		return bookRepository.save(existingBook);
-//	}
+
 
 	public void deleteBook(Long id) throws NotFoundException {
 		bookRepository.findById(id)
@@ -150,17 +120,7 @@ public class BookServiceImpl implements BookService {
 		
 	}
 
-	@Override
-	public Book createBook(Book book) throws ConflictException {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	@Override
-	public Book updateBook(Long id, Book book) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	
 }

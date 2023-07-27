@@ -79,35 +79,6 @@ public class UserServiceImpl implements UserService {
 	            throw new UserNotFoundException("user not found with id : "+id);
 	        }
 		}
-		
-
-//	    public User updateUser(Long id,User user) {
-//			// TODO Auto-generated method stub
-//			User existingUser = userRepository.findById(id)
-//					.orElseThrow(() -> new NotFoundException("User not found with id " + id));
-//			existingUser.setFirstName(user.getFirstName());
-//			existingUser.setLastName(user.getLastName());
-//			existingUser.setUsername(user.getUsername()); 
-////			existingUser.setPassword(passwordEncoder.encode(user.getPassword())); 
-//	        existingUser.setEmail(user.getEmail());
-//	        existingUser.setPhoneNumber(user.getPhoneNumber());
-//	        existingUser.setEnabled(true);
-//	        
-//			return userRepository.save(existingUser);
-//		}
-
-//		@Override
-//		@Transactional
-//		public void deleteUser(long userId) {
-//			// TODO Auto-generated method stub
-////			 subscriptionService.deleteSubscriptionsBySubscriber(userId);
-////			 User subscriber = userService.getUserById(subscriberId) ;
-////		     subscriptionRepository.deleteSubscriptionsBySubscriber(subscriber);
-//			 userRepository.deleteUserByUserId(userId);
-//		}
-
-		
-		
-		 
+			 
 	
 }

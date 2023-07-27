@@ -16,8 +16,7 @@ public interface BookService {
 	List<Book> getBooksButNotSubscribedAndPublished(String username) throws UserNotFoundException;
 	
 	Book createBookWithFiles(MultipartFile coverImage,MultipartFile sourceFile,String title,String description,String author, String isbn, int pageCount)throws ConflictException ;
-	public Book createBook(Book book) throws ConflictException ;
-	public Book updateBook(Long id, Book book) ;
+
 
 	public void deleteBook(Long id);
 }

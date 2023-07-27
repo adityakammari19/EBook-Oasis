@@ -29,18 +29,7 @@ public class ApplicationExceptionHandler {
         return errorMap;
     }
 	
-//	@ResponseStatus(HttpStatus.BAD_REQUEST)
-//	@ExceptionHandler(MethodArgumentTypeMismatchException.class)
-//	public Map<String, String> handleInvalidMethodArgument(MethodArgumentNotValidException ex) {
-////		Map<String, String> errorMap = new HashMap<>();
-////		ex.getBindingResult().getFieldErrors().forEach(error -> {
-////			errorMap.put(error.getField(), error.getDefaultMessage());
-////		});
-////		return errorMap;
-//		Map<String, String> errorMap = new HashMap<>();
-//		errorMap.put("errorMessage", ex.getMessage());
-//		return errorMap;
-//	}
+
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(UserNotFoundException.class)
